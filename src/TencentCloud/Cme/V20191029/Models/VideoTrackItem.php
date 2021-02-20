@@ -20,26 +20,34 @@ use TencentCloud\Common\AbstractModel;
 /**
  * 视频轨的视频片段信息。
  *
- * @method string getSourceType() 获取视频素材来源类型。取值有：
+ * @method string getSourceType() 获取视频媒体来源类型，取值有：
 <ul>
-<li>VOD ：素材来源 VOD 。</li>
-<li>CME ：视频来源 CME 。</li>
+<li>VOD ：媒体来源于云点播文件 。</li>
+<li>CME ：视频来源制作云媒体文件。</li>
+<li>EXTERNAL ：视频来源于媒资绑定。</li>
 </ul>
- * @method void setSourceType(string $SourceType) 设置视频素材来源类型。取值有：
+ * @method void setSourceType(string $SourceType) 设置视频媒体来源类型，取值有：
 <ul>
-<li>VOD ：素材来源 VOD 。</li>
-<li>CME ：视频来源 CME 。</li>
+<li>VOD ：媒体来源于云点播文件 。</li>
+<li>CME ：视频来源制作云媒体文件。</li>
+<li>EXTERNAL ：视频来源于媒资绑定。</li>
 </ul>
- * @method string getSourceMedia() 获取视频片段的媒体素材来源，可以是：
-<li>VOD 的媒体文件 ID 。</li>
-<li>CME 的素材 ID 。</li>
- * @method void setSourceMedia(string $SourceMedia) 设置视频片段的媒体素材来源，可以是：
-<li>VOD 的媒体文件 ID 。</li>
-<li>CME 的素材 ID 。</li>
- * @method float getSourceMediaStartTime() 获取视频片段取自素材文件的起始时间，单位为秒。默认为0。
- * @method void setSourceMediaStartTime(float $SourceMediaStartTime) 设置视频片段取自素材文件的起始时间，单位为秒。默认为0。
- * @method float getDuration() 获取视频片段时长，单位为秒。默认取视频素材本身长度，表示截取全部素材。如果源文件是图片，Duration需要大于0。
- * @method void setDuration(float $Duration) 设置视频片段时长，单位为秒。默认取视频素材本身长度，表示截取全部素材。如果源文件是图片，Duration需要大于0。
+ * @method string getSourceMedia() 获取视频片段的媒体文件来源，取值为：
+<ul>
+<li>当 SourceType 为 VOD 时，为云点播的媒体文件 FileId ，会默认将该 FileId 导入到项目中；</li>
+<li>当 SourceType 为 CME 时，为制作云的媒体 ID，项目归属者必须对该云媒资有访问权限；</li>
+<li>当 SourceType 为 EXTERNAL 时，为媒资绑定的 Definition 与 MediaKey 中间用冒号分隔合并后的字符串，格式为 Definition:MediaKey 。</li>
+</ul>
+ * @method void setSourceMedia(string $SourceMedia) 设置视频片段的媒体文件来源，取值为：
+<ul>
+<li>当 SourceType 为 VOD 时，为云点播的媒体文件 FileId ，会默认将该 FileId 导入到项目中；</li>
+<li>当 SourceType 为 CME 时，为制作云的媒体 ID，项目归属者必须对该云媒资有访问权限；</li>
+<li>当 SourceType 为 EXTERNAL 时，为媒资绑定的 Definition 与 MediaKey 中间用冒号分隔合并后的字符串，格式为 Definition:MediaKey 。</li>
+</ul>
+ * @method float getSourceMediaStartTime() 获取视频片段取自媒体文件的起始时间，单位为秒。默认为0。
+ * @method void setSourceMediaStartTime(float $SourceMediaStartTime) 设置视频片段取自媒体文件的起始时间，单位为秒。默认为0。
+ * @method float getDuration() 获取视频片段时长，单位为秒。默认取视频媒体文件本身长度，表示截取全部媒体文件。如果源文件是图片，Duration需要大于0。
+ * @method void setDuration(float $Duration) 设置视频片段时长，单位为秒。默认取视频媒体文件本身长度，表示截取全部媒体文件。如果源文件是图片，Duration需要大于0。
  * @method string getXPos() 获取视频片段原点距离画布原点的水平位置。支持 %、px 两种格式：
 <li>当字符串以 % 结尾，表示视频片段 XPos 为画布宽度指定百分比的位置，如 10% 表示 XPos 为画布口宽度的 10%。</li>
 <li>当字符串以 px 结尾，表示视频片段 XPos 单位为像素，如 100px 表示 XPos 为100像素。</li>
@@ -63,55 +71,59 @@ use TencentCloud\Common\AbstractModel;
 <li>Center：坐标原点为中心位置，如画布中心。</li>
 默认值 ：Center。
  * @method string getHeight() 获取视频片段的高度。支持 %、px 两种格式：
-<li>当字符串以 % 结尾，表示视频片段 Height 为画布高度的百分比大小，如 10% 表示 Height 为画布高度的 10%；
-</li><li>当字符串以 px 结尾，表示视频片段 Height 单位为像素，如 100px 表示 Height 为100像素。</li>
-<li>当 Width、Height 均为空，则 Width 和 Height 取视频素材本身的 Width、Height。</li>
-<li>当 Width 为空，Height 非空，则 Width 按比例缩放</li>
+<li>当字符串以 % 结尾，表示视频片段 Height 为画布高度的百分比大小，如 10% 表示 Height 为画布高度的 10%；</li>
+<li>当字符串以 px 结尾，表示视频片段 Height 单位为像素，如 100px 表示 Height 为100像素；</li>
+<li>当 Width、Height 均为空，则 Width 和 Height 取视频媒体文件本身的 Width、Height；</li>
+<li>当 Width 为空，Height 非空，则 Width 按比例缩放；</li>
 <li>当 Width 非空，Height 为空，则 Height 按比例缩放。</li>
  * @method void setHeight(string $Height) 设置视频片段的高度。支持 %、px 两种格式：
-<li>当字符串以 % 结尾，表示视频片段 Height 为画布高度的百分比大小，如 10% 表示 Height 为画布高度的 10%；
-</li><li>当字符串以 px 结尾，表示视频片段 Height 单位为像素，如 100px 表示 Height 为100像素。</li>
-<li>当 Width、Height 均为空，则 Width 和 Height 取视频素材本身的 Width、Height。</li>
-<li>当 Width 为空，Height 非空，则 Width 按比例缩放</li>
+<li>当字符串以 % 结尾，表示视频片段 Height 为画布高度的百分比大小，如 10% 表示 Height 为画布高度的 10%；</li>
+<li>当字符串以 px 结尾，表示视频片段 Height 单位为像素，如 100px 表示 Height 为100像素；</li>
+<li>当 Width、Height 均为空，则 Width 和 Height 取视频媒体文件本身的 Width、Height；</li>
+<li>当 Width 为空，Height 非空，则 Width 按比例缩放；</li>
 <li>当 Width 非空，Height 为空，则 Height 按比例缩放。</li>
  * @method string getWidth() 获取视频片段的宽度。支持 %、px 两种格式：
-<li>当字符串以 % 结尾，表示视频片段 Width 为画布宽度的百分比大小，如 10% 表示 Width 为画布宽度的 10%。</li>
-<li>当字符串以 px 结尾，表示视频片段 Width 单位为像素，如 100px 表示 Width 为100像素。</li>
-<li>当 Width、Height 均为空，则 Width 和 Height 取视频素材本身的 Width、Height。</li>
-<li>当 Width 为空，Height 非空，则 Width 按比例缩放</li>
+<li>当字符串以 % 结尾，表示视频片段 Width 为画布宽度的百分比大小，如 10% 表示 Width 为画布宽度的 10%；</li>
+<li>当字符串以 px 结尾，表示视频片段 Width 单位为像素，如 100px 表示 Width 为100像素；</li>
+<li>当 Width、Height 均为空，则 Width 和 Height 取视频媒体文件本身的 Width、Height；</li>
+<li>当 Width 为空，Height 非空，则 Width 按比例缩放；</li>
 <li>当 Width 非空，Height 为空，则 Height 按比例缩放。</li>
  * @method void setWidth(string $Width) 设置视频片段的宽度。支持 %、px 两种格式：
-<li>当字符串以 % 结尾，表示视频片段 Width 为画布宽度的百分比大小，如 10% 表示 Width 为画布宽度的 10%。</li>
-<li>当字符串以 px 结尾，表示视频片段 Width 单位为像素，如 100px 表示 Width 为100像素。</li>
-<li>当 Width、Height 均为空，则 Width 和 Height 取视频素材本身的 Width、Height。</li>
-<li>当 Width 为空，Height 非空，则 Width 按比例缩放</li>
+<li>当字符串以 % 结尾，表示视频片段 Width 为画布宽度的百分比大小，如 10% 表示 Width 为画布宽度的 10%；</li>
+<li>当字符串以 px 结尾，表示视频片段 Width 单位为像素，如 100px 表示 Width 为100像素；</li>
+<li>当 Width、Height 均为空，则 Width 和 Height 取视频媒体文件本身的 Width、Height；</li>
+<li>当 Width 为空，Height 非空，则 Width 按比例缩放；</li>
 <li>当 Width 非空，Height 为空，则 Height 按比例缩放。</li>
  */
 class VideoTrackItem extends AbstractModel
 {
     /**
-     * @var string 视频素材来源类型。取值有：
+     * @var string 视频媒体来源类型，取值有：
 <ul>
-<li>VOD ：素材来源 VOD 。</li>
-<li>CME ：视频来源 CME 。</li>
+<li>VOD ：媒体来源于云点播文件 。</li>
+<li>CME ：视频来源制作云媒体文件。</li>
+<li>EXTERNAL ：视频来源于媒资绑定。</li>
 </ul>
      */
     public $SourceType;
 
     /**
-     * @var string 视频片段的媒体素材来源，可以是：
-<li>VOD 的媒体文件 ID 。</li>
-<li>CME 的素材 ID 。</li>
+     * @var string 视频片段的媒体文件来源，取值为：
+<ul>
+<li>当 SourceType 为 VOD 时，为云点播的媒体文件 FileId ，会默认将该 FileId 导入到项目中；</li>
+<li>当 SourceType 为 CME 时，为制作云的媒体 ID，项目归属者必须对该云媒资有访问权限；</li>
+<li>当 SourceType 为 EXTERNAL 时，为媒资绑定的 Definition 与 MediaKey 中间用冒号分隔合并后的字符串，格式为 Definition:MediaKey 。</li>
+</ul>
      */
     public $SourceMedia;
 
     /**
-     * @var float 视频片段取自素材文件的起始时间，单位为秒。默认为0。
+     * @var float 视频片段取自媒体文件的起始时间，单位为秒。默认为0。
      */
     public $SourceMediaStartTime;
 
     /**
-     * @var float 视频片段时长，单位为秒。默认取视频素材本身长度，表示截取全部素材。如果源文件是图片，Duration需要大于0。
+     * @var float 视频片段时长，单位为秒。默认取视频媒体文件本身长度，表示截取全部媒体文件。如果源文件是图片，Duration需要大于0。
      */
     public $Duration;
 
@@ -140,35 +152,39 @@ class VideoTrackItem extends AbstractModel
 
     /**
      * @var string 视频片段的高度。支持 %、px 两种格式：
-<li>当字符串以 % 结尾，表示视频片段 Height 为画布高度的百分比大小，如 10% 表示 Height 为画布高度的 10%；
-</li><li>当字符串以 px 结尾，表示视频片段 Height 单位为像素，如 100px 表示 Height 为100像素。</li>
-<li>当 Width、Height 均为空，则 Width 和 Height 取视频素材本身的 Width、Height。</li>
-<li>当 Width 为空，Height 非空，则 Width 按比例缩放</li>
+<li>当字符串以 % 结尾，表示视频片段 Height 为画布高度的百分比大小，如 10% 表示 Height 为画布高度的 10%；</li>
+<li>当字符串以 px 结尾，表示视频片段 Height 单位为像素，如 100px 表示 Height 为100像素；</li>
+<li>当 Width、Height 均为空，则 Width 和 Height 取视频媒体文件本身的 Width、Height；</li>
+<li>当 Width 为空，Height 非空，则 Width 按比例缩放；</li>
 <li>当 Width 非空，Height 为空，则 Height 按比例缩放。</li>
      */
     public $Height;
 
     /**
      * @var string 视频片段的宽度。支持 %、px 两种格式：
-<li>当字符串以 % 结尾，表示视频片段 Width 为画布宽度的百分比大小，如 10% 表示 Width 为画布宽度的 10%。</li>
-<li>当字符串以 px 结尾，表示视频片段 Width 单位为像素，如 100px 表示 Width 为100像素。</li>
-<li>当 Width、Height 均为空，则 Width 和 Height 取视频素材本身的 Width、Height。</li>
-<li>当 Width 为空，Height 非空，则 Width 按比例缩放</li>
+<li>当字符串以 % 结尾，表示视频片段 Width 为画布宽度的百分比大小，如 10% 表示 Width 为画布宽度的 10%；</li>
+<li>当字符串以 px 结尾，表示视频片段 Width 单位为像素，如 100px 表示 Width 为100像素；</li>
+<li>当 Width、Height 均为空，则 Width 和 Height 取视频媒体文件本身的 Width、Height；</li>
+<li>当 Width 为空，Height 非空，则 Width 按比例缩放；</li>
 <li>当 Width 非空，Height 为空，则 Height 按比例缩放。</li>
      */
     public $Width;
 
     /**
-     * @param string $SourceType 视频素材来源类型。取值有：
+     * @param string $SourceType 视频媒体来源类型，取值有：
 <ul>
-<li>VOD ：素材来源 VOD 。</li>
-<li>CME ：视频来源 CME 。</li>
+<li>VOD ：媒体来源于云点播文件 。</li>
+<li>CME ：视频来源制作云媒体文件。</li>
+<li>EXTERNAL ：视频来源于媒资绑定。</li>
 </ul>
-     * @param string $SourceMedia 视频片段的媒体素材来源，可以是：
-<li>VOD 的媒体文件 ID 。</li>
-<li>CME 的素材 ID 。</li>
-     * @param float $SourceMediaStartTime 视频片段取自素材文件的起始时间，单位为秒。默认为0。
-     * @param float $Duration 视频片段时长，单位为秒。默认取视频素材本身长度，表示截取全部素材。如果源文件是图片，Duration需要大于0。
+     * @param string $SourceMedia 视频片段的媒体文件来源，取值为：
+<ul>
+<li>当 SourceType 为 VOD 时，为云点播的媒体文件 FileId ，会默认将该 FileId 导入到项目中；</li>
+<li>当 SourceType 为 CME 时，为制作云的媒体 ID，项目归属者必须对该云媒资有访问权限；</li>
+<li>当 SourceType 为 EXTERNAL 时，为媒资绑定的 Definition 与 MediaKey 中间用冒号分隔合并后的字符串，格式为 Definition:MediaKey 。</li>
+</ul>
+     * @param float $SourceMediaStartTime 视频片段取自媒体文件的起始时间，单位为秒。默认为0。
+     * @param float $Duration 视频片段时长，单位为秒。默认取视频媒体文件本身长度，表示截取全部媒体文件。如果源文件是图片，Duration需要大于0。
      * @param string $XPos 视频片段原点距离画布原点的水平位置。支持 %、px 两种格式：
 <li>当字符串以 % 结尾，表示视频片段 XPos 为画布宽度指定百分比的位置，如 10% 表示 XPos 为画布口宽度的 10%。</li>
 <li>当字符串以 px 结尾，表示视频片段 XPos 单位为像素，如 100px 表示 XPos 为100像素。</li>
@@ -181,16 +197,16 @@ class VideoTrackItem extends AbstractModel
 <li>Center：坐标原点为中心位置，如画布中心。</li>
 默认值 ：Center。
      * @param string $Height 视频片段的高度。支持 %、px 两种格式：
-<li>当字符串以 % 结尾，表示视频片段 Height 为画布高度的百分比大小，如 10% 表示 Height 为画布高度的 10%；
-</li><li>当字符串以 px 结尾，表示视频片段 Height 单位为像素，如 100px 表示 Height 为100像素。</li>
-<li>当 Width、Height 均为空，则 Width 和 Height 取视频素材本身的 Width、Height。</li>
-<li>当 Width 为空，Height 非空，则 Width 按比例缩放</li>
+<li>当字符串以 % 结尾，表示视频片段 Height 为画布高度的百分比大小，如 10% 表示 Height 为画布高度的 10%；</li>
+<li>当字符串以 px 结尾，表示视频片段 Height 单位为像素，如 100px 表示 Height 为100像素；</li>
+<li>当 Width、Height 均为空，则 Width 和 Height 取视频媒体文件本身的 Width、Height；</li>
+<li>当 Width 为空，Height 非空，则 Width 按比例缩放；</li>
 <li>当 Width 非空，Height 为空，则 Height 按比例缩放。</li>
      * @param string $Width 视频片段的宽度。支持 %、px 两种格式：
-<li>当字符串以 % 结尾，表示视频片段 Width 为画布宽度的百分比大小，如 10% 表示 Width 为画布宽度的 10%。</li>
-<li>当字符串以 px 结尾，表示视频片段 Width 单位为像素，如 100px 表示 Width 为100像素。</li>
-<li>当 Width、Height 均为空，则 Width 和 Height 取视频素材本身的 Width、Height。</li>
-<li>当 Width 为空，Height 非空，则 Width 按比例缩放</li>
+<li>当字符串以 % 结尾，表示视频片段 Width 为画布宽度的百分比大小，如 10% 表示 Width 为画布宽度的 10%；</li>
+<li>当字符串以 px 结尾，表示视频片段 Width 单位为像素，如 100px 表示 Width 为100像素；</li>
+<li>当 Width、Height 均为空，则 Width 和 Height 取视频媒体文件本身的 Width、Height；</li>
+<li>当 Width 为空，Height 非空，则 Width 按比例缩放；</li>
 <li>当 Width 非空，Height 为空，则 Height 按比例缩放。</li>
      */
     function __construct()

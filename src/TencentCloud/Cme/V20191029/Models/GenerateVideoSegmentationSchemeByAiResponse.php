@@ -18,26 +18,19 @@ namespace TencentCloud\Cme\V20191029\Models;
 use TencentCloud\Common\AbstractModel;
 
 /**
- * ImportMaterial返回参数结构体
+ * GenerateVideoSegmentationSchemeByAi返回参数结构体
  *
- * @method string getMaterialId() 获取媒体 Id。
- * @method void setMaterialId(string $MaterialId) 设置媒体 Id。
- * @method string getPreProcessTaskId() 获取媒体文预处理任务 ID，如果未指定发起预处理任务则为空。
- * @method void setPreProcessTaskId(string $PreProcessTaskId) 设置媒体文预处理任务 ID，如果未指定发起预处理任务则为空。
+ * @method string getTaskId() 获取视频智能拆条任务 Id 。
+ * @method void setTaskId(string $TaskId) 设置视频智能拆条任务 Id 。
  * @method string getRequestId() 获取唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
  * @method void setRequestId(string $RequestId) 设置唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
  */
-class ImportMaterialResponse extends AbstractModel
+class GenerateVideoSegmentationSchemeByAiResponse extends AbstractModel
 {
     /**
-     * @var string 媒体 Id。
+     * @var string 视频智能拆条任务 Id 。
      */
-    public $MaterialId;
-
-    /**
-     * @var string 媒体文预处理任务 ID，如果未指定发起预处理任务则为空。
-     */
-    public $PreProcessTaskId;
+    public $TaskId;
 
     /**
      * @var string 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -45,8 +38,7 @@ class ImportMaterialResponse extends AbstractModel
     public $RequestId;
 
     /**
-     * @param string $MaterialId 媒体 Id。
-     * @param string $PreProcessTaskId 媒体文预处理任务 ID，如果未指定发起预处理任务则为空。
+     * @param string $TaskId 视频智能拆条任务 Id 。
      * @param string $RequestId 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     function __construct()
@@ -62,12 +54,8 @@ class ImportMaterialResponse extends AbstractModel
         if ($param === null) {
             return;
         }
-        if (array_key_exists("MaterialId",$param) and $param["MaterialId"] !== null) {
-            $this->MaterialId = $param["MaterialId"];
-        }
-
-        if (array_key_exists("PreProcessTaskId",$param) and $param["PreProcessTaskId"] !== null) {
-            $this->PreProcessTaskId = $param["PreProcessTaskId"];
+        if (array_key_exists("TaskId",$param) and $param["TaskId"] !== null) {
+            $this->TaskId = $param["TaskId"];
         }
 
         if (array_key_exists("RequestId",$param) and $param["RequestId"] !== null) {

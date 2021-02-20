@@ -18,18 +18,16 @@ namespace TencentCloud\Cme\V20191029\Models;
 use TencentCloud\Common\AbstractModel;
 
 /**
- * DescribeTeams请求参数结构体
+ * GenerateVideoSegmentationSchemeByAi请求参数结构体
  *
  * @method string getPlatform() 获取平台名称，指定访问的平台。
  * @method void setPlatform(string $Platform) 设置平台名称，指定访问的平台。
- * @method array getTeamIds() 获取团队 ID 列表，限30个。
- * @method void setTeamIds(array $TeamIds) 设置团队 ID 列表，限30个。
- * @method integer getOffset() 获取分页偏移量，默认值：0。
- * @method void setOffset(integer $Offset) 设置分页偏移量，默认值：0。
- * @method integer getLimit() 获取返回记录条数，默认值：20，最大值：30。
- * @method void setLimit(integer $Limit) 设置返回记录条数，默认值：20，最大值：30。
+ * @method string getProjectId() 获取视频拆条项目 Id 。
+ * @method void setProjectId(string $ProjectId) 设置视频拆条项目 Id 。
+ * @method string getOperator() 获取操作者。填写用户的 Id，用于标识调用者及校验操作权限。
+ * @method void setOperator(string $Operator) 设置操作者。填写用户的 Id，用于标识调用者及校验操作权限。
  */
-class DescribeTeamsRequest extends AbstractModel
+class GenerateVideoSegmentationSchemeByAiRequest extends AbstractModel
 {
     /**
      * @var string 平台名称，指定访问的平台。
@@ -37,25 +35,19 @@ class DescribeTeamsRequest extends AbstractModel
     public $Platform;
 
     /**
-     * @var array 团队 ID 列表，限30个。
+     * @var string 视频拆条项目 Id 。
      */
-    public $TeamIds;
+    public $ProjectId;
 
     /**
-     * @var integer 分页偏移量，默认值：0。
+     * @var string 操作者。填写用户的 Id，用于标识调用者及校验操作权限。
      */
-    public $Offset;
-
-    /**
-     * @var integer 返回记录条数，默认值：20，最大值：30。
-     */
-    public $Limit;
+    public $Operator;
 
     /**
      * @param string $Platform 平台名称，指定访问的平台。
-     * @param array $TeamIds 团队 ID 列表，限30个。
-     * @param integer $Offset 分页偏移量，默认值：0。
-     * @param integer $Limit 返回记录条数，默认值：20，最大值：30。
+     * @param string $ProjectId 视频拆条项目 Id 。
+     * @param string $Operator 操作者。填写用户的 Id，用于标识调用者及校验操作权限。
      */
     function __construct()
     {
@@ -74,16 +66,12 @@ class DescribeTeamsRequest extends AbstractModel
             $this->Platform = $param["Platform"];
         }
 
-        if (array_key_exists("TeamIds",$param) and $param["TeamIds"] !== null) {
-            $this->TeamIds = $param["TeamIds"];
+        if (array_key_exists("ProjectId",$param) and $param["ProjectId"] !== null) {
+            $this->ProjectId = $param["ProjectId"];
         }
 
-        if (array_key_exists("Offset",$param) and $param["Offset"] !== null) {
-            $this->Offset = $param["Offset"];
-        }
-
-        if (array_key_exists("Limit",$param) and $param["Limit"] !== null) {
-            $this->Limit = $param["Limit"];
+        if (array_key_exists("Operator",$param) and $param["Operator"] !== null) {
+            $this->Operator = $param["Operator"];
         }
     }
 }

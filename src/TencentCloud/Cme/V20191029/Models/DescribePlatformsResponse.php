@@ -18,26 +18,26 @@ namespace TencentCloud\Cme\V20191029\Models;
 use TencentCloud\Common\AbstractModel;
 
 /**
- * ImportMaterial返回参数结构体
+ * DescribePlatforms返回参数结构体
  *
- * @method string getMaterialId() 获取媒体 Id。
- * @method void setMaterialId(string $MaterialId) 设置媒体 Id。
- * @method string getPreProcessTaskId() 获取媒体文预处理任务 ID，如果未指定发起预处理任务则为空。
- * @method void setPreProcessTaskId(string $PreProcessTaskId) 设置媒体文预处理任务 ID，如果未指定发起预处理任务则为空。
+ * @method integer getTotalCount() 获取符合搜索条件的记录总数。
+ * @method void setTotalCount(integer $TotalCount) 设置符合搜索条件的记录总数。
+ * @method array getPlatformInfoSet() 获取平台信息列表。
+ * @method void setPlatformInfoSet(array $PlatformInfoSet) 设置平台信息列表。
  * @method string getRequestId() 获取唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
  * @method void setRequestId(string $RequestId) 设置唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
  */
-class ImportMaterialResponse extends AbstractModel
+class DescribePlatformsResponse extends AbstractModel
 {
     /**
-     * @var string 媒体 Id。
+     * @var integer 符合搜索条件的记录总数。
      */
-    public $MaterialId;
+    public $TotalCount;
 
     /**
-     * @var string 媒体文预处理任务 ID，如果未指定发起预处理任务则为空。
+     * @var array 平台信息列表。
      */
-    public $PreProcessTaskId;
+    public $PlatformInfoSet;
 
     /**
      * @var string 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -45,8 +45,8 @@ class ImportMaterialResponse extends AbstractModel
     public $RequestId;
 
     /**
-     * @param string $MaterialId 媒体 Id。
-     * @param string $PreProcessTaskId 媒体文预处理任务 ID，如果未指定发起预处理任务则为空。
+     * @param integer $TotalCount 符合搜索条件的记录总数。
+     * @param array $PlatformInfoSet 平台信息列表。
      * @param string $RequestId 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     function __construct()
@@ -62,12 +62,17 @@ class ImportMaterialResponse extends AbstractModel
         if ($param === null) {
             return;
         }
-        if (array_key_exists("MaterialId",$param) and $param["MaterialId"] !== null) {
-            $this->MaterialId = $param["MaterialId"];
+        if (array_key_exists("TotalCount",$param) and $param["TotalCount"] !== null) {
+            $this->TotalCount = $param["TotalCount"];
         }
 
-        if (array_key_exists("PreProcessTaskId",$param) and $param["PreProcessTaskId"] !== null) {
-            $this->PreProcessTaskId = $param["PreProcessTaskId"];
+        if (array_key_exists("PlatformInfoSet",$param) and $param["PlatformInfoSet"] !== null) {
+            $this->PlatformInfoSet = [];
+            foreach ($param["PlatformInfoSet"] as $key => $value){
+                $obj = new PlatformInfo();
+                $obj->deserialize($value);
+                array_push($this->PlatformInfoSet, $obj);
+            }
         }
 
         if (array_key_exists("RequestId",$param) and $param["RequestId"] !== null) {
