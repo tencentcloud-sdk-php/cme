@@ -18,35 +18,19 @@ namespace TencentCloud\Cme\V20191029\Models;
 use TencentCloud\Common\AbstractModel;
 
 /**
- * FlattenListMedia返回参数结构体
+ * MoveResource返回参数结构体
  *
- * @method integer getTotalCount() 获取符合条件的记录总数。
- * @method void setTotalCount(integer $TotalCount) 设置符合条件的记录总数。
- * @method array getMaterialInfoSet() 获取该分类路径下及其子分类下的所有媒体基础信息列表。
- * @method void setMaterialInfoSet(array $MaterialInfoSet) 设置该分类路径下及其子分类下的所有媒体基础信息列表。
  * @method string getRequestId() 获取唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
  * @method void setRequestId(string $RequestId) 设置唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
  */
-class FlattenListMediaResponse extends AbstractModel
+class MoveResourceResponse extends AbstractModel
 {
-    /**
-     * @var integer 符合条件的记录总数。
-     */
-    public $TotalCount;
-
-    /**
-     * @var array 该分类路径下及其子分类下的所有媒体基础信息列表。
-     */
-    public $MaterialInfoSet;
-
     /**
      * @var string 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     public $RequestId;
 
     /**
-     * @param integer $TotalCount 符合条件的记录总数。
-     * @param array $MaterialInfoSet 该分类路径下及其子分类下的所有媒体基础信息列表。
      * @param string $RequestId 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     function __construct()
@@ -62,19 +46,6 @@ class FlattenListMediaResponse extends AbstractModel
         if ($param === null) {
             return;
         }
-        if (array_key_exists("TotalCount",$param) and $param["TotalCount"] !== null) {
-            $this->TotalCount = $param["TotalCount"];
-        }
-
-        if (array_key_exists("MaterialInfoSet",$param) and $param["MaterialInfoSet"] !== null) {
-            $this->MaterialInfoSet = [];
-            foreach ($param["MaterialInfoSet"] as $key => $value){
-                $obj = new MaterialInfo();
-                $obj->deserialize($value);
-                array_push($this->MaterialInfoSet, $obj);
-            }
-        }
-
         if (array_key_exists("RequestId",$param) and $param["RequestId"] !== null) {
             $this->RequestId = $param["RequestId"];
         }
