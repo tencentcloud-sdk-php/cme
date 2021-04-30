@@ -20,17 +20,25 @@ use TencentCloud\Common\AbstractModel;
 /**
  * HandleStreamConnectProject返回参数结构体
  *
+ * @method string getStreamInputRtmpPushUrl() 获取输入源推流地址，当 Operation 取值 AddInput 且 InputType 为 RtmpPush 类型时有效。
+ * @method void setStreamInputRtmpPushUrl(string $StreamInputRtmpPushUrl) 设置输入源推流地址，当 Operation 取值 AddInput 且 InputType 为 RtmpPush 类型时有效。
  * @method string getRequestId() 获取唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
  * @method void setRequestId(string $RequestId) 设置唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
  */
 class HandleStreamConnectProjectResponse extends AbstractModel
 {
     /**
+     * @var string 输入源推流地址，当 Operation 取值 AddInput 且 InputType 为 RtmpPush 类型时有效。
+     */
+    public $StreamInputRtmpPushUrl;
+
+    /**
      * @var string 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     public $RequestId;
 
     /**
+     * @param string $StreamInputRtmpPushUrl 输入源推流地址，当 Operation 取值 AddInput 且 InputType 为 RtmpPush 类型时有效。
      * @param string $RequestId 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     function __construct()
@@ -46,6 +54,10 @@ class HandleStreamConnectProjectResponse extends AbstractModel
         if ($param === null) {
             return;
         }
+        if (array_key_exists("StreamInputRtmpPushUrl",$param) and $param["StreamInputRtmpPushUrl"] !== null) {
+            $this->StreamInputRtmpPushUrl = $param["StreamInputRtmpPushUrl"];
+        }
+
         if (array_key_exists("RequestId",$param) and $param["RequestId"] !== null) {
             $this->RequestId = $param["RequestId"];
         }
