@@ -18,18 +18,18 @@ namespace TencentCloud\Cme\V20191029\Models;
 use TencentCloud\Common\AbstractModel;
 
 /**
- * DescribeJoinTeams请求参数结构体
+ * DescribeVideoEncodingPresets请求参数结构体
  *
  * @method string getPlatform() 获取平台名称，指定访问的平台。
  * @method void setPlatform(string $Platform) 设置平台名称，指定访问的平台。
- * @method string getMemberId() 获取团队成员　ID。
- * @method void setMemberId(string $MemberId) 设置团队成员　ID。
- * @method integer getOffset() 获取分页偏移量，默认值：0。
- * @method void setOffset(integer $Offset) 设置分页偏移量，默认值：0。
- * @method integer getLimit() 获取返回记录条数，默认值：30，最大值：30。
- * @method void setLimit(integer $Limit) 设置返回记录条数，默认值：30，最大值：30。
+ * @method array getIds() 获取要查询的配置 ID 列表。填写该参数则按照配置 ID 进行查询。
+ * @method void setIds(array $Ids) 设置要查询的配置 ID 列表。填写该参数则按照配置 ID 进行查询。
+ * @method integer getLimit() 获取分页大小，默认20。最大值50。
+ * @method void setLimit(integer $Limit) 设置分页大小，默认20。最大值50。
+ * @method integer getOffset() 获取分页起始，默认0。
+ * @method void setOffset(integer $Offset) 设置分页起始，默认0。
  */
-class DescribeJoinTeamsRequest extends AbstractModel
+class DescribeVideoEncodingPresetsRequest extends AbstractModel
 {
     /**
      * @var string 平台名称，指定访问的平台。
@@ -37,25 +37,25 @@ class DescribeJoinTeamsRequest extends AbstractModel
     public $Platform;
 
     /**
-     * @var string 团队成员　ID。
+     * @var array 要查询的配置 ID 列表。填写该参数则按照配置 ID 进行查询。
      */
-    public $MemberId;
+    public $Ids;
 
     /**
-     * @var integer 分页偏移量，默认值：0。
-     */
-    public $Offset;
-
-    /**
-     * @var integer 返回记录条数，默认值：30，最大值：30。
+     * @var integer 分页大小，默认20。最大值50。
      */
     public $Limit;
 
     /**
+     * @var integer 分页起始，默认0。
+     */
+    public $Offset;
+
+    /**
      * @param string $Platform 平台名称，指定访问的平台。
-     * @param string $MemberId 团队成员　ID。
-     * @param integer $Offset 分页偏移量，默认值：0。
-     * @param integer $Limit 返回记录条数，默认值：30，最大值：30。
+     * @param array $Ids 要查询的配置 ID 列表。填写该参数则按照配置 ID 进行查询。
+     * @param integer $Limit 分页大小，默认20。最大值50。
+     * @param integer $Offset 分页起始，默认0。
      */
     function __construct()
     {
@@ -74,16 +74,16 @@ class DescribeJoinTeamsRequest extends AbstractModel
             $this->Platform = $param["Platform"];
         }
 
-        if (array_key_exists("MemberId",$param) and $param["MemberId"] !== null) {
-            $this->MemberId = $param["MemberId"];
-        }
-
-        if (array_key_exists("Offset",$param) and $param["Offset"] !== null) {
-            $this->Offset = $param["Offset"];
+        if (array_key_exists("Ids",$param) and $param["Ids"] !== null) {
+            $this->Ids = $param["Ids"];
         }
 
         if (array_key_exists("Limit",$param) and $param["Limit"] !== null) {
             $this->Limit = $param["Limit"];
+        }
+
+        if (array_key_exists("Offset",$param) and $param["Offset"] !== null) {
+            $this->Offset = $param["Offset"];
         }
     }
 }

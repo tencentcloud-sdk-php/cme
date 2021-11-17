@@ -18,26 +18,19 @@ namespace TencentCloud\Cme\V20191029\Models;
 use TencentCloud\Common\AbstractModel;
 
 /**
- * DescribeJoinTeams返回参数结构体
+ * CreateVideoEncodingPreset返回参数结构体
  *
- * @method integer getTotalCount() 获取符合条件的记录总数。
- * @method void setTotalCount(integer $TotalCount) 设置符合条件的记录总数。
- * @method array getTeamSet() 获取团队列表。
- * @method void setTeamSet(array $TeamSet) 设置团队列表。
+ * @method integer getId() 获取模板 ID。
+ * @method void setId(integer $Id) 设置模板 ID。
  * @method string getRequestId() 获取唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
  * @method void setRequestId(string $RequestId) 设置唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
  */
-class DescribeJoinTeamsResponse extends AbstractModel
+class CreateVideoEncodingPresetResponse extends AbstractModel
 {
     /**
-     * @var integer 符合条件的记录总数。
+     * @var integer 模板 ID。
      */
-    public $TotalCount;
-
-    /**
-     * @var array 团队列表。
-     */
-    public $TeamSet;
+    public $Id;
 
     /**
      * @var string 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -45,8 +38,7 @@ class DescribeJoinTeamsResponse extends AbstractModel
     public $RequestId;
 
     /**
-     * @param integer $TotalCount 符合条件的记录总数。
-     * @param array $TeamSet 团队列表。
+     * @param integer $Id 模板 ID。
      * @param string $RequestId 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     function __construct()
@@ -62,17 +54,8 @@ class DescribeJoinTeamsResponse extends AbstractModel
         if ($param === null) {
             return;
         }
-        if (array_key_exists("TotalCount",$param) and $param["TotalCount"] !== null) {
-            $this->TotalCount = $param["TotalCount"];
-        }
-
-        if (array_key_exists("TeamSet",$param) and $param["TeamSet"] !== null) {
-            $this->TeamSet = [];
-            foreach ($param["TeamSet"] as $key => $value){
-                $obj = new JoinTeamInfo();
-                $obj->deserialize($value);
-                array_push($this->TeamSet, $obj);
-            }
+        if (array_key_exists("Id",$param) and $param["Id"] !== null) {
+            $this->Id = $param["Id"];
         }
 
         if (array_key_exists("RequestId",$param) and $param["RequestId"] !== null) {

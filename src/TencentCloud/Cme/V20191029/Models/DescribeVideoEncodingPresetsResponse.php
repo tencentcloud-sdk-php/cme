@@ -18,26 +18,26 @@ namespace TencentCloud\Cme\V20191029\Models;
 use TencentCloud\Common\AbstractModel;
 
 /**
- * DescribeJoinTeams返回参数结构体
+ * DescribeVideoEncodingPresets返回参数结构体
  *
- * @method integer getTotalCount() 获取符合条件的记录总数。
- * @method void setTotalCount(integer $TotalCount) 设置符合条件的记录总数。
- * @method array getTeamSet() 获取团队列表。
- * @method void setTeamSet(array $TeamSet) 设置团队列表。
+ * @method integer getTotalCount() 获取符合条件的编码配置总个数。
+ * @method void setTotalCount(integer $TotalCount) 设置符合条件的编码配置总个数。
+ * @method array getVideoEncodingPresetSet() 获取视频编码配置信息。
+ * @method void setVideoEncodingPresetSet(array $VideoEncodingPresetSet) 设置视频编码配置信息。
  * @method string getRequestId() 获取唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
  * @method void setRequestId(string $RequestId) 设置唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
  */
-class DescribeJoinTeamsResponse extends AbstractModel
+class DescribeVideoEncodingPresetsResponse extends AbstractModel
 {
     /**
-     * @var integer 符合条件的记录总数。
+     * @var integer 符合条件的编码配置总个数。
      */
     public $TotalCount;
 
     /**
-     * @var array 团队列表。
+     * @var array 视频编码配置信息。
      */
-    public $TeamSet;
+    public $VideoEncodingPresetSet;
 
     /**
      * @var string 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -45,8 +45,8 @@ class DescribeJoinTeamsResponse extends AbstractModel
     public $RequestId;
 
     /**
-     * @param integer $TotalCount 符合条件的记录总数。
-     * @param array $TeamSet 团队列表。
+     * @param integer $TotalCount 符合条件的编码配置总个数。
+     * @param array $VideoEncodingPresetSet 视频编码配置信息。
      * @param string $RequestId 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     function __construct()
@@ -66,12 +66,12 @@ class DescribeJoinTeamsResponse extends AbstractModel
             $this->TotalCount = $param["TotalCount"];
         }
 
-        if (array_key_exists("TeamSet",$param) and $param["TeamSet"] !== null) {
-            $this->TeamSet = [];
-            foreach ($param["TeamSet"] as $key => $value){
-                $obj = new JoinTeamInfo();
+        if (array_key_exists("VideoEncodingPresetSet",$param) and $param["VideoEncodingPresetSet"] !== null) {
+            $this->VideoEncodingPresetSet = [];
+            foreach ($param["VideoEncodingPresetSet"] as $key => $value){
+                $obj = new VideoEncodingPreset();
                 $obj->deserialize($value);
-                array_push($this->TeamSet, $obj);
+                array_push($this->VideoEncodingPresetSet, $obj);
             }
         }
 

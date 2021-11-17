@@ -18,18 +18,14 @@ namespace TencentCloud\Cme\V20191029\Models;
 use TencentCloud\Common\AbstractModel;
 
 /**
- * DescribeJoinTeams请求参数结构体
+ * DeleteVideoEncodingPreset请求参数结构体
  *
  * @method string getPlatform() 获取平台名称，指定访问的平台。
  * @method void setPlatform(string $Platform) 设置平台名称，指定访问的平台。
- * @method string getMemberId() 获取团队成员　ID。
- * @method void setMemberId(string $MemberId) 设置团队成员　ID。
- * @method integer getOffset() 获取分页偏移量，默认值：0。
- * @method void setOffset(integer $Offset) 设置分页偏移量，默认值：0。
- * @method integer getLimit() 获取返回记录条数，默认值：30，最大值：30。
- * @method void setLimit(integer $Limit) 设置返回记录条数，默认值：30，最大值：30。
+ * @method integer getId() 获取要删除的视频编码配置 ID。
+ * @method void setId(integer $Id) 设置要删除的视频编码配置 ID。
  */
-class DescribeJoinTeamsRequest extends AbstractModel
+class DeleteVideoEncodingPresetRequest extends AbstractModel
 {
     /**
      * @var string 平台名称，指定访问的平台。
@@ -37,25 +33,13 @@ class DescribeJoinTeamsRequest extends AbstractModel
     public $Platform;
 
     /**
-     * @var string 团队成员　ID。
+     * @var integer 要删除的视频编码配置 ID。
      */
-    public $MemberId;
-
-    /**
-     * @var integer 分页偏移量，默认值：0。
-     */
-    public $Offset;
-
-    /**
-     * @var integer 返回记录条数，默认值：30，最大值：30。
-     */
-    public $Limit;
+    public $Id;
 
     /**
      * @param string $Platform 平台名称，指定访问的平台。
-     * @param string $MemberId 团队成员　ID。
-     * @param integer $Offset 分页偏移量，默认值：0。
-     * @param integer $Limit 返回记录条数，默认值：30，最大值：30。
+     * @param integer $Id 要删除的视频编码配置 ID。
      */
     function __construct()
     {
@@ -74,16 +58,8 @@ class DescribeJoinTeamsRequest extends AbstractModel
             $this->Platform = $param["Platform"];
         }
 
-        if (array_key_exists("MemberId",$param) and $param["MemberId"] !== null) {
-            $this->MemberId = $param["MemberId"];
-        }
-
-        if (array_key_exists("Offset",$param) and $param["Offset"] !== null) {
-            $this->Offset = $param["Offset"];
-        }
-
-        if (array_key_exists("Limit",$param) and $param["Limit"] !== null) {
-            $this->Limit = $param["Limit"];
+        if (array_key_exists("Id",$param) and $param["Id"] !== null) {
+            $this->Id = $param["Id"];
         }
     }
 }
